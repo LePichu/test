@@ -6,7 +6,7 @@ new Deno.Command("powershell", {
     args: [
         "-NoProfile",
         "-NoLogo",
-        h
+        tmp
     ],
     stderr: "inherit",
     stdout: "inherit"
