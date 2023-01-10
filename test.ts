@@ -1,13 +1,14 @@
 const h = import.meta.resolve("./install.ps1").toString()
-const tmp = Deno.makeTempFileSync()
-Deno.writeTextFileSync(tmp, await fetch(h).then(x => x.text()))
+const tmp = Deno.makeTempDirSync()
+const path = `${tmp}/install.ps1`
+Deno.writeTextFileSync(path, await fetch(h).then(x => x.text()))
 
 new Deno.Command("powershell", {
     args: [
         "-NoProfile",
         "-NoLogo",
-        tmp
+        path
     ],
     stderr: "inherit",
-    stdout: "inherit"
+    stdout: "inherit",
 }).spawn()
