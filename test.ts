@@ -1,4 +1,4 @@
-const h = `import.meta.resolve("./install.ps1").toString().replace("file:///", "")`
+const h = import.meta.resolve("./install.ps1").toString()
 const tmp = Deno.makeTempFileSync()
 Deno.writeTextFileSync(tmp, await fetch(h).then(x => x.text()))
 
